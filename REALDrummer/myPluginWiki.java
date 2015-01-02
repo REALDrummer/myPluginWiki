@@ -40,9 +40,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
-/** This is the main class of the plugin
- * 
- * @author REALDrummer */
+/**
+ * This is the main class of the plugin
+ *
+ * @author REALDrummer
+ */
 @SuppressWarnings("deprecation")
 public class myPluginWiki extends JavaPlugin {
     public static Plugin mPW;
@@ -53,7 +55,7 @@ public class myPluginWiki extends JavaPlugin {
     public static final String[] MINECRAFT_COLORS = { "black", "red", "green", "brown", "blue", "purple", "cyan", "light gray", "gray", "pink", "lime", "yellow",
             "light blue", "magenta", "orange", "white" }, COLOR_COLOR_CODE_CHARS = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" },
             FORMATTING_COLOR_CODE_CHARS = { "k", "l", "m", "n", "o", "r" }, COLOR_CODE_CHARS = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e",
-                    "f", "k", "l", "m", "n", "o", "r" };
+            "f", "k", "l", "m", "n", "o", "r" };
     // String[item I.D.][special data][all the names that could be applied to that item]
     // the special data works like this:
     /* [?][0] is the name for the overall item, e.g. "logs" for any type of log, which all have the I.D. 17; the other indexes are [data+1], e.g. birch logs (I.D. = 17 & data
@@ -61,9 +63,11 @@ public class myPluginWiki extends JavaPlugin {
     /* in the third dimension of the array, [0] is the plural, [1] is the singular, and the others are just a list of other possible names for the item */
     public static final String[][][] ITEM_IDS = {
             { { "air", "some air" } },
-            { { "stone", "some stone", "rock", "smooth stone" } },
+            { { "stone", "some stone", "rock", "smooth stone" }, { "stone", "some stone", "rock", "smooth stone" }, { "granite", "some granite", "red stone" }, { "polished granit", "some polished granite", "red flagstone", "red tile", "polished red stone" },
+                    { "diorite", "some diorite", "white stone" }, { "polished diorite", "some polished diorite", "white fladstone", "white tile", "polished white stone" },
+                    { "andesite", "some andesite", "coarse stone", "messy stone" }, { "polished andesite", "some polished andesite", "grey flagstone", "grey tile", "gray flagstone", "gray tile", "polished coarse stone" } },
             { { "grass", "some grass", "grass blocks" } },
-            { { "dirt", "some dirt", "filth" }, { "grassless dirt", "some grassless dirt", "dirt without grass", "dirt with no grass", "filth without grass" },
+            { { "dirt", "some dirt", "filth" }, { "dirt", "some dirt", "filth" }, { "coarse dirt", "some coarse dirt", "grassless dirt", "grassless dirt", "dirt without grass", "dirt with no grass", "filth without grass" },
                     { "podzol", "some podzol", "forest floor", "pine needles", "acid dirt", "acid soil", "dirty grass", "dead leaves", "fallen leaves", "pine droppings" } },
             { { "cobblestone", "some cobblestone", "cobblies" } },
             { { "wooden planks", "some wooden planks", "planks" }, { "oak planks", "some oak planks", "oak wooden planks" },
@@ -93,7 +97,7 @@ public class myPluginWiki extends JavaPlugin {
                     { "jungle leaves", "some jungle leaves", "jungle leaves blocks", "jungle leafs blocks" },
                     { "acacia leaves", "some acacia leaves", "acacia leaves blocks", "acacia leafs blocks" },
                     { "dark oak leaves", "some dark oak leaves", "dark big large huge old ancient oak leafs leaves blocks" } },
-            { { "sponges", "a sponge", "loofas" } },
+            { { "sponges", "a sponge", "loofas" }, { "sponges", "a sponge", "loofas" }, { "wet sponges", "a wet sponge" } },
             { { "glass", "some glass", "glass blocks", "glass cubes" } },
             { { "lapis lazuli ore", "some lapis lazuli ore" } },
             { { "lapis lazuli blocks", "a lapis lazuli block", "blocks of lapis lazuli" } },
@@ -102,7 +106,7 @@ public class myPluginWiki extends JavaPlugin {
                     { "sandstone", "some sandstone", "sandbricks" },
                     { "regular sandstone", "some regular sandstone", "regular sandbricks", "normal sandstone", "normal sandbricks", "natural sandstone", "natural sandbricks" },
                     { "chiseled sandstone", "some chiseled sandstone", "chiseled sandbricks", "ancient sandstone", "ancient sandbricks", "pyramid sandstone",
-                            "pyramid sandbricks", "hieroglyphics sandstone", "hieroglyphics sandbricks" },
+                            "pyramid sandbricks", "hieroglyphic sandstone", "hieroglyphic sandbricks" },
                     { "smooth sandstone", "some smooth sandstone", "smooth sandbricks", "clean sandstone", "clean sandbricks" } },
             { { "note blocks", "a note block", "music blocks", "sound blocks", "speakers" } },
             { { "beds", "a bed" } },
@@ -173,7 +177,7 @@ public class myPluginWiki extends JavaPlugin {
             { { "furnaces", "a furnace", "ovens", "ranges" } },
             { { "burning furnaces", "a burning furnace", "active burning ovens ranges furnaces" } },
             { { "sign posts", "a sign post", "ground sign posts" } },
-            { { "wooden doors", "a wooden door", "doors" } },
+            { { "oak doors", "an oak door"} },
             { { "ladders", "a ladder", "wooden rope ladders" } },
             { { "rails", "a rail", "normal regular unpowered iron rails railroad tracks" } },
             { { "cobblestone stairs", "some cobblestone stairs", "cobblestone steps" } },
@@ -194,7 +198,7 @@ public class myPluginWiki extends JavaPlugin {
             { { "clay blocks", "a clay block", "blocks of clay" } },
             { { "sugar cane", "some sugar cane", "sugar canes", "sugarcanes" } },
             { { "jukeboxes", "a jukebox", "disc player", "music box", "slotted block", ".mp3 player" } },
-            { { "wooden fences", "a wooden fence post", "wooden fence posts", "wooden railings" } },
+            { { "oak fences", "an oak fence post", "oak fence posts", "oak railings" } },
             { { "pumpkins", "a pumpkin", "unlit Jack-o'-Lanterns", "dark Jack-o'-Lanterns" } },
             { { "Netherrack", "some Netherrack", "Nether rack", "Nether dirt" } },
             { { "Soul Sand", "some Soul Sand", "Nether sand", "quicksand", "quick sand" } },
@@ -242,7 +246,7 @@ public class myPluginWiki extends JavaPlugin {
             { { "pumpkin stems", "a pumpkin stem", "pumpkin stalks", "pumpkin vines" } },
             { { "melon stems", "a melon stem", "melon stalks", "melon vines", "watermelon stems", "watermelon stalks", "watermelon vines" } },
             { { "vines", "some vines", "jungle vines", "swamp vines" } },
-            { { "fence gates", "a fence gate", "wooden gates", "wood gates" } },
+            { { "oak fence gates", "an oak fence gate", "oak gates", "oak gates" } },
             { { "brick stairs", "some brick stairs", "brick steps", "clay brick stairs", "clay brick steps" } },
             { { "stone brick stairs", "some stone brick stairs", "stone brick steps", "stone stairs", "stone steps" } },
             { { "mycelium", "some mycelium", "mushroom grass", "shroom grass", "mushroom biome grass" } },
@@ -404,6 +408,14 @@ public class myPluginWiki extends JavaPlugin {
                     { "dark oak logs", "a dark oak log", "dark big large huge old ancient oak logs", "dark big large huge old ancient oak wood" } },
             { { "acacia stairs", "some acacia stairs", "acacia wood stairs", "acacia wood steps" } },
             { { "dark oak stairs", "some dark oak stairs", "dark big large huge old ancient oak wood stairs", "dark big large huge old ancient oak wood steps" } },
+            { { "slime blocks", "a slime block", "bouncy block" } },
+            { { "barrier blocks", "a barrier block", "invisible block" } },
+            { { "iron trapdoors", "an iron trapdoor", "silver trapdoor", "locked trapdoor", "locking trapdoor" } },
+            { { "prismarine", "some prismarine" },
+                    { "prismarine blocks", "a prismarine block", "sea block" },
+                    { "prismarine bricks", "a prismarine brick", "sea brick" },
+                    { "dark prismarine", "some dark prismarine", "dark sea blocks", "dark sea bricks" } },
+            { { "sea lanterns", "a sea lantern", "sea light", "blue glowstone", "glowing prismarine" } },
             { { "hay bales", "a hay bale", "hay blocks", "wheat block", "horse cow sheep food blocks", "bread blocks" } },
             { { "carpet", "some carpet", "wool carpeting" }, { "white carpet", "some white carpet", "white wool carpeting" },
                     { "orange carpet", "some orange carpet", "orange wool carpeting" }, { "magenta carpet", "some magenta carpet", "magenta wool carpeting" },
@@ -423,6 +435,33 @@ public class myPluginWiki extends JavaPlugin {
                     { "very tall grass", "some very tall grass", "super extra tall grass", "high grass" },
                     { "large ferns", "a large fern", "some extra tall large double block height ferns" },
                     { "rose bushes", "a rose bush", "large roses", "roses trees", "roses", "big large tall double height red flowers" }, { "peonies", "a peony", "peonys" } },
+            {{"standing banners", "a standing banner", "free standing banner"}},
+            {{"mounted banners", "a mounted banner", "wall mounted banner"}},
+            {{"inverted daylight sensors", "an inverted daylight sensor", "night sensor"}},
+            {
+                    { "red sandstone", "some red sandstone", "red sandbricks" },
+                    { "regular red sandstone", "some regular red sandstone", "regular red sandbricks", "normal red sandstone", "normal red sandbricks", "natural red sandstone", "natural red sandbricks" },
+                    { "smooth red sandstone", "some smooth red sandstone", "smooth red sandbricks", "clean red sandstone", "clean red sandbricks" },
+                    { "chiseled red sandstone", "some chiseled red sandstone", "chiseled red sandbricks", "ancient red sandstone", "ancient red sandbricks", "hieroglyphic red sandstone", "hieroglyphic red sandbricks" } },
+            { { "red sandstone stairs", "some red sandstone stairs", "red sandstone steps" } },
+            { { "red sandstone double slab blocks", "a red sandstone double slab block", "red sandstone double slabs", "red sandstone stacked slabs", "red sandbrick double slab blocks",
+                    "red sandbrick double slabs", "red sandbrick stacked slabs" } },
+            { { "red sandstone slabs", "a red sandstone slab", "red sandstone half blocks", "red sandbrick slabs", "red sandbrick half blocks" }, },
+            { { "spruce fence gates", "a spruce fence gate", "spruce gates", "spruce gates" } },
+            { { "birch fence gates", "a birch fence gate", "birch gates", "birch gates" } },
+            { { "jungle fence gates", "a jungle fence gate", "jungle gates", "jungle gates" } },
+            { { "dark oak fence gates", "a dark oak fence gate", "dark oak gates", "dark oak gates" } },
+            { { "acacia fence gates", "an acacia fence gate", "acacia gates", "acacia gates" } },
+            { { "spruce fences", "a spruce fence post", "spruce fence posts", "spruce railings" } },
+            { { "birch fences", "a birch fence post", "birch fence posts", "birch railings" } },
+            { { "jungle fences", "a jungle fence post", "jungle fence posts", "jungle railings" } },
+            { { "dark oak fences", "a dark oak fence post", "dark oak fence posts", "dark oak railings" } },
+            { { "acacia fences", "an acacia fence post", "acacia fence posts", "acacia railings" } },
+            { { "spruce doors", "a spruce door"} },
+            { { "birch doors", "a birch door"} },
+            { { "jungle doors", "a jungle door"} },
+            { { "acacia doors", "an acacia door"} },
+            { { "dark oak doors", "a dark oak door"} },
             // block I.D.s --> item I.D.s
             { { "iron shovels", "an iron shovel", "iron spades" } },
             { { "iron pickaxes", "an iron pickaxe", "iron picks" } },
@@ -496,7 +535,7 @@ public class myPluginWiki extends JavaPlugin {
                     { "enchanted golden apples", "an enchanted golden apple", "enchanted gold apples", "magic golden apples", "magic gold apples", "shiny golden apples",
                             "shiny gold apples", "shining golden apples", "shiny golden apples" } },
             { { "signs", "a sign", "sign posts", "posted signs", "wall signs" } },
-            { { "wooden doors", "a wooden door", "wood doors" } },
+            { { "oak doors", "an oak door", "oak doors" } },
             { { "buckets", "a bucket", "pails" } },
             { { "buckets of water", "a bucket of water", "water buckets" } },
             { { "buckets of lava", "a bucket of lava", "lava buckets" } },
@@ -874,9 +913,9 @@ public class myPluginWiki extends JavaPlugin {
             CAN_BE_BROKEN_BY_LIQUIDS_IDS = { 0, 27, 28, 30, 31, 32, 37, 38, 39, 40, 50, 51, 55, 59, 66, 69, 75, 76, 78, 93, 94, 104, 105, 106, 115, 127, 131, 132, 140, 141,
                     142, 144, 149, 150, 157 }, LOCKABLE_PORTAL_IDS = { 64, 71, 96, 107 }, LOCKABLE_SWITCH_IDS = { 28, 69, 70, 72, 77, 143, 147, 148 },
             LOCKABLE_CONTAINER_IDS = { 23, 54, -58, 61, 62, 84, -116, 117, 130, 137, 138, -145, 146, 154, 158 }, NON_SOLID_BLOCK_IDS = { 0, 6, 27, 28, 30, 31, 32, 37, 38, 39,
-                    40, 50, 51, 55, 59, 63, 64, 65, 66, 68, 69, 70, 71, 72, 75, 76, 77, 78, 83, 90, 93, 94, 104, 105, 115, 119, 131, 132, 140, 141, 142, 142, 144, 147, 148,
-                    149, 150, 157, 171, 175 }, SOLID_PARTIAL_HEIGHT_BLOCK_IDS = { 44, 93, 94, 96, 111, 126, 149, 150, 151 }, FENCE_HEIGHT_BLOCK_IDS = { 85, 107, 139 };
-    public static final short[][] ITEM_GAPS = { { 164, 170 }, { 175, 256 }, { 408, 417 }, { 422, 2256 } }, ENTITY_GAPS = { { 2, 8 }, { 22, 41 }, { 66, 90 }, { 99, 120 },
+            40, 50, 51, 55, 59, 63, 64, 65, 66, 68, 69, 70, 71, 72, 75, 76, 77, 78, 83, 90, 93, 94, 104, 105, 115, 119, 131, 132, 140, 141, 142, 142, 144, 147, 148,
+            149, 150, 157, 171, 175 }, SOLID_PARTIAL_HEIGHT_BLOCK_IDS = { 44, 93, 94, 96, 111, 126, 149, 150, 151 }, FENCE_HEIGHT_BLOCK_IDS = { 85, 107, 139 };
+    public static final short[][] ITEM_GAPS = { { 197, 256 }, { 408, 417 }, { 422, 2256 } }, ENTITY_GAPS = { { 2, 8 }, { 22, 41 }, { 66, 90 }, { 99, 120 },
             { 120, 200 } }, POTION_DATA_GAPS = { { 0, 16 }, { 16, 32 }, { 32, 64 }, { 64, 8193 }, { 8206, 8225 }, { 8229, 8233 }, { 8236, 8257 }, { 8270, 8289 },
             { 8292, 8297 }, { 8297, 16385 }, { 16398, 16417 }, { 16421, 16425 }, { 16428, 16449 }, { 16462, 16481 }, { 16484, 16489 } }, SPAWN_EGG_DATA_GAPS = { { -1, 50 },
             { 66, 90 }, { 98, 120 } }, ENCHANTMENT_GAPS = { { 7, 16 }, { 21, 32 }, { 35, 48 } }, DAMAGEABLE_ITEM_IDS = { { 256, 265 }, { 257, 265 }, { 258, 265 }, { 259 },
@@ -987,14 +1026,16 @@ public class myPluginWiki extends JavaPlugin {
     }
 
     // working methods
-    /** This method will tell whether or not a certain block will break if water or lava flows to it. No data value is required as input for this method because items with the
+
+    /**
+     * This method will tell whether or not a certain block will break if water or lava flows to it. No data value is required as input for this method because items with the
      * same I.D. consistently have this property in common.
-     * 
-     * @param id
-     *            is the I.D. of the block that needs to be checked for the "can be broken by liquids" property.
+     *
+     * @param id is the I.D. of the block that needs to be checked for the "can be broken by liquids" property.
      * @return <b>true</b> if the block given by the I.D. will break if water or lava flows to it, <b>false</b> if the block will hold back water or lava, or <b>null</b> if
-     *         the I.D. given does not apply to a block at all.
-     * @see {@link #canBeBrokenByLiquids(String) canBeBrokenByLiquids(String)} and {@link #canBeBrokenByLiquids(Block) canBeBrokenByLiquids(Block)} */
+     * the I.D. given does not apply to a block at all.
+     * @see {@link #canBeBrokenByLiquids(String) canBeBrokenByLiquids(String)} and {@link #canBeBrokenByLiquids(Block) canBeBrokenByLiquids(Block)}
+     */
     public static Boolean canBeBrokenByLiquids(int id) {
         // return null if the I.D. doesn't belong to anything or is an item I.D. instead of a block I.D.
         if (getItemName(id, -1, false, false, true) == null || id >= 256)
@@ -1005,24 +1046,24 @@ public class myPluginWiki extends JavaPlugin {
         return false;
     }
 
-    /** This method returns a two-item Integer array or <b>null</b>. <tt>[0]</tt> is the I.D. of the item given by <tt>item_name</tt>. <tt>[1]</tt> is the data value of the
+    /**
+     * This method returns a two-item Integer array or <b>null</b>. <tt>[0]</tt> is the I.D. of the item given by <tt>item_name</tt>. <tt>[1]</tt> is the data value of the
      * item given, e.g. 2 for birch wood (because all logs have the I.D. 17, but a data value of 2 refers to birch wood specifically). If <tt><b>item_name</tt></b> specifies a
      * general item name such as "logs", the data value returned will be -1.
-     * 
-     * @param item_name
-     *            is the name of the item or block type that was specified split into separate words.
-     * @param item_ID
-     *            is <b>true</b> if this method should only return item I.D.s and not block type I.D.s, <b>false</b> if this method should only return block type I.D.s and not
-     *            item I.D.s, or <b>null</b> if it should return either item I.D.s or block type I.D.s, in which case it will proritize item I.D.s over block type I.D.s.
+     *
+     * @param item_name is the name of the item or block type that was specified split into separate words.
+     * @param item_ID   is <b>true</b> if this method should only return item I.D.s and not block type I.D.s, <b>false</b> if this method should only return block type I.D.s and not
+     *                  item I.D.s, or <b>null</b> if it should return either item I.D.s or block type I.D.s, in which case it will proritize item I.D.s over block type I.D.s.
      * @return the I.D. and numerical data value for the item given by name in <tt><b>item_name</tt></b> in a two-item Integer array or <tt><b>null</b></tt> if <b>1)</b> the
-     *         item specified does not exist or <b>2)</b> the object specified is an item, not a block type, and it was specified in <tt><b>item_ID</b></tt> that this method
-     *         should only return block types or vice versa.
+     * item specified does not exist or <b>2)</b> the object specified is an item, not a block type, and it was specified in <tt><b>item_ID</b></tt> that this method
+     * should only return block types or vice versa.
      * @NOTE This method returns both the I.D. and the data value of an item based on the item's name because it encourages the programmer to only use this method once as
-     *       necessary, not once to get the I.D. and again to get the data. It is a long, somewhat complex method and it must search through hundreds and hundreds of Strings
-     *       in the <tt>ITEM_IDS</tt> array to find a match. This method should only be called when necessary and results returned by this method should be stored in a
-     *       variable if needed more than once; do not simply call this method a second time.
+     * necessary, not once to get the I.D. and again to get the data. It is a long, somewhat complex method and it must search through hundreds and hundreds of Strings
+     * in the <tt>ITEM_IDS</tt> array to find a match. This method should only be called when necessary and results returned by this method should be stored in a
+     * variable if needed more than once; do not simply call this method a second time.
      * @see {@link #getItemIdAndData(String, Boolean) getItemIdAndData(String, Boolean)}, {@link #getItemIdAndDataString(String[], Boolean) getItemIdAndDataString(String[],
-     *      Boolean)}, and {@link #getItemIdAndDataString(String, Boolean) getItemIdAndDataString(String, Boolean)} */
+     * Boolean)}, and {@link #getItemIdAndDataString(String, Boolean) getItemIdAndDataString(String, Boolean)}
+     */
     public static Integer[] getItemIdAndData(String[] item_name, Boolean item_ID) {
         Integer result_id = null, result_data = null, result_i = null;
         int start_id = 0;
@@ -1049,8 +1090,8 @@ public class myPluginWiki extends JavaPlugin {
                             // is a block I.D. and item_ID is null, then change the current result to this new item
                             if (contains_query
                                     && (result_id == null || ITEM_IDS[result_id][result_data][result_i].length() > ITEM_IDS[check_id][check_data][i].length() || (ITEM_IDS[result_id][result_data][result_i]
-                                            .equals(ITEM_IDS[check_id][check_data][i])
-                                            && item_ID == null && result_id < check_id))) {
+                                    .equals(ITEM_IDS[check_id][check_data][i])
+                                    && item_ID == null && result_id < check_id))) {
                                 result_id = check_id;
                                 result_data = check_data;
                                 result_i = i;
@@ -1068,7 +1109,7 @@ public class myPluginWiki extends JavaPlugin {
                     // try reading it as "something with the I.D. [id]"
                     result_id = Integer.parseInt(item_name[4]);
                     result_data = -1;
-                    return new Integer[] { result_id, result_data };
+                    return new Integer[]{ result_id, result_data };
                 } catch (NumberFormatException exception) {
                     try {
                         // try reading it as "something with the I.D. [id]:[data]"
@@ -1084,7 +1125,7 @@ public class myPluginWiki extends JavaPlugin {
                         }
                         result_id = Integer.parseInt(id_and_data[0]);
                         result_data = Integer.parseInt(id_and_data[1]);
-                        return new Integer[] { result_id, result_data };
+                        return new Integer[]{ result_id, result_data };
                     } catch (NumberFormatException exception2) {
                         console.sendMessage(ChatColor.DARK_RED + "Darn! Something went wrong! I couldn't get the I.D. and data from this object name.");
                         String item = "";
@@ -1123,7 +1164,7 @@ public class myPluginWiki extends JavaPlugin {
                             + " as the data value in the data suffix.");
                     exception.printStackTrace();
                 }
-            // only adjust the result data if there was no data suffix to get the true data from
+                // only adjust the result data if there was no data suffix to get the true data from
             else {
                 // for the potion data values gaps
                 if (result_id == 373)
@@ -1132,7 +1173,7 @@ public class myPluginWiki extends JavaPlugin {
                             result_data += (gap[1] - gap[0] - 1);
                         else
                             break;
-                // for the spawn egg data values gaps
+                    // for the spawn egg data values gaps
                 else if (result_id == 383)
                     for (short[] gap : SPAWN_EGG_DATA_GAPS)
                         if (result_data > gap[0])
@@ -1141,29 +1182,26 @@ public class myPluginWiki extends JavaPlugin {
                             break;
             }
         }
-        return new Integer[] { result_id, result_data };
+        return new Integer[]{ result_id, result_data };
     }
 
-    /** This method returns the name of the item specified by the item or block type I.D. and data given.
-     * 
-     * @param id
-     *            is the item or block type I.D.
-     * @param data
-     *            is the numerical data value for the item or block.
-     * @param give_data_suffix
-     *            specifies whether or not the name of the item should include the numerical data value at the end of the item name in parentheses (e.g.
-     *            "a trapdoor <b>(16)</b>"). For logging purposes in myGuardDog, for example, we should be as specific as possible on information about the item, so this
-     *            argument should be <b>true</b>. However, for messages to users for commands like <i>/id</i>, the data suffix is not helpful and looks awkward, so this
-     *            argument should be <b>false</b>.
-     * @param singular
-     *            specifies whether the item name returned should be returned in the singular form (e.g. "a lever") or in the plural form (e.g. "levers"). Non-countable items
-     *            like grass are the same as their plural forms, but with "some" at the beginning ("grass" --> "some grass").
-     * @param without_article
-     *            specifies whether or not the article should be excluded from the item name returned. Plural item names are preceded by "some"; singular item names can be
-     *            preceded by "some", "a", "an", or "the".
+    /**
+     * This method returns the name of the item specified by the item or block type I.D. and data given.
+     *
+     * @param id               is the item or block type I.D.
+     * @param data             is the numerical data value for the item or block.
+     * @param give_data_suffix specifies whether or not the name of the item should include the numerical data value at the end of the item name in parentheses (e.g.
+     *                         "a trapdoor <b>(16)</b>"). For logging purposes in myGuardDog, for example, we should be as specific as possible on information about the item, so this
+     *                         argument should be <b>true</b>. However, for messages to users for commands like <i>/id</i>, the data suffix is not helpful and looks awkward, so this
+     *                         argument should be <b>false</b>.
+     * @param singular         specifies whether the item name returned should be returned in the singular form (e.g. "a lever") or in the plural form (e.g. "levers"). Non-countable items
+     *                         like grass are the same as their plural forms, but with "some" at the beginning ("grass" --> "some grass").
+     * @param without_article  specifies whether or not the article should be excluded from the item name returned. Plural item names are preceded by "some"; singular item names can be
+     *                         preceded by "some", "a", "an", or "the".
      * @return the name of the item specified by the item or block type I.D. and data given.
      * @see {@link #getItemName(Block, boolean, boolean) getItemName(Block, boolean, boolean)} and {@link #getItemName(ItemStack, boolean, boolean) getItemName(ItemStack,
-     *      boolean, boolean)} */
+     * boolean, boolean)}
+     */
     public static String getItemName(int id, int data, boolean give_data_suffix, boolean singular, boolean without_article) {
         // return null if the potion data is inside a gap
         if (id == 373)
@@ -1238,26 +1276,27 @@ public class myPluginWiki extends JavaPlugin {
         // if the item is singular and we want no article, remove the preexisting article
         if (singular && without_article)
             item = item.substring(item.split(" ")[0].length() + 1);
-        // if the item is plural and we want an article, just add a "some" to the beginning
+            // if the item is plural and we want an article, just add a "some" to the beginning
         else if (!singular && !without_article)
             item = "some " + item;
         return item;
     }
 
-    /** This method returns a two-item Integer array or <b>null</b>. <tt>[0]</tt> is the I.D. of the entity given by <tt>entity_name</tt>. <tt>[1]</tt> is the data value of the
+    /**
+     * This method returns a two-item Integer array or <b>null</b>. <tt>[0]</tt> is the I.D. of the entity given by <tt>entity_name</tt>. <tt>[1]</tt> is the data value of the
      * item given, e.g. 1 for charged creepers (because all creepers have the I.D. 50, but a data value of 1 refers to charged creepers specifically). If
      * <tt><b>entity_name</b></tt> specifies a general item name such as "creepers", the data value returned will be -1.
-     * 
-     * @param entity_name
-     *            is the name of the entity that was specified split into separate words.
+     *
+     * @param entity_name is the name of the entity that was specified split into separate words.
      * @return the I.D. and numerical data value for the item given by name in <tt><b>entity_name</tt></b> in a two-item Integer array or <tt><b>null</b></tt> if the item
-     *         specified does not exist.
-     * @see {@link #getEntityIdAndData(String) getEntityIdAndData(String)}, {@link #getEntityIdAndDataString(String[]) getEntityIdAndDataString(String[])}, and
-     *      {@link #getEntityIdAndDataString(String) getEntityIdAndDataString(String)}
+     * specified does not exist.
      * @NOTE This method returns both the I.D. and the data value of an entity based on the entity's name because it encourages the programmer to only use this method once as
-     *       necessary, not once to get the I.D. and again to get the data. It is a long, somewhat complex method and it must search through hundreds of Strings in the
-     *       <tt>ENTITY_IDS</tt> array to find a match. This method should only be called when necessary and results returned by this method should be stored in a variable if
-     *       needed more than once; do not simply call this method a second time. */
+     * necessary, not once to get the I.D. and again to get the data. It is a long, somewhat complex method and it must search through hundreds of Strings in the
+     * <tt>ENTITY_IDS</tt> array to find a match. This method should only be called when necessary and results returned by this method should be stored in a variable if
+     * needed more than once; do not simply call this method a second time.
+     * @see {@link #getEntityIdAndData(String) getEntityIdAndData(String)}, {@link #getEntityIdAndDataString(String[]) getEntityIdAndDataString(String[])}, and
+     * {@link #getEntityIdAndDataString(String) getEntityIdAndDataString(String)}
+     */
     public static Integer[] getEntityIdAndData(String[] entity_name) {
         Integer result_id = null, result_data = null, result_i = null;
         for (int id = 0; id < ENTITY_IDS.length; id++)
@@ -1279,8 +1318,8 @@ public class myPluginWiki extends JavaPlugin {
                             // one is a block I.D., then change the current result to this new entity
                             if (contains_query
                                     && (result_id == null || ENTITY_IDS[result_id][result_data][result_i].length() > ENTITY_IDS[id][data][i].length() || (ENTITY_IDS[result_id][result_data][result_i]
-                                            .length() == ENTITY_IDS[id][data][i].length()
-                                            && result_id < 256 && id >= 256))) {
+                                    .length() == ENTITY_IDS[id][data][i].length()
+                                    && result_id < 256 && id >= 256))) {
                                 result_id = id;
                                 result_data = data;
                                 result_i = i;
@@ -1293,7 +1332,7 @@ public class myPluginWiki extends JavaPlugin {
                     // try reading it as "something with the I.D. [id]"
                     result_id = Integer.parseInt(entity_name[4]);
                     result_data = 0;
-                    return new Integer[] { result_id, result_data };
+                    return new Integer[]{ result_id, result_data };
                 } catch (NumberFormatException exception) {
                     try {
                         // try reading it as "something with the I.D. [id]:[data]"
@@ -1309,7 +1348,7 @@ public class myPluginWiki extends JavaPlugin {
                         }
                         result_id = Integer.parseInt(id_and_data[0]);
                         result_data = Integer.parseInt(id_and_data[1]);
-                        return new Integer[] { result_id, result_data };
+                        return new Integer[]{ result_id, result_data };
                     } catch (NumberFormatException exception2) {
                         console.sendMessage(ChatColor.DARK_RED + "Darn! Something went wrong! I couldn't get the I.D. and data from this object name.");
                         String entity = "";
@@ -1348,29 +1387,26 @@ public class myPluginWiki extends JavaPlugin {
                 else
                     break;
         }
-        return new Integer[] { result_id, result_data };
+        return new Integer[]{ result_id, result_data };
     }
 
-    /** This method returns the name of the entity specified by the I.D. and data given.
-     * 
-     * @param id
-     *            is the entity type I.D.
-     * @param data
-     *            is the numerical data value for the entity. Data is only used for creepers states (charged vs. non-charged), villagers (professions), and sheep (colors).
-     *            Giving a data value of -1 will result in the general name for such an entity, e.g. "sheep" rather than "white sheep" or "orange sheep".
-     * @param give_data_suffix
-     *            specifies whether or not the name of the entity should include the numerical data value at the end of the item name in parentheses (e.g.
-     *            "a trapdoor <b>(16)</b>"). For logging purposes in myGuardDog, for example, we should be as specific as possible on information about the item, so this
-     *            argument should be <b>true</b>. However, for messages to users for commands like <i>/eid</i>, the data suffix is not helpful and looks awkward, so this
-     *            argument should be <b>false</b>.
-     * @param singular
-     *            specifies whether the entity name returned should be returned in the singular form (e.g. "a creeper") or in the plural form (e.g. "creepers"). Singular forms
-     *            include an article at the beginning.
-     * @param without_article
-     *            specifies whether or not the article should be excluded from the item name returned. Plural item names are preceded by "some"; singular item names can be
-     *            preceded by "some", "a", "an", or "the".
+    /**
+     * This method returns the name of the entity specified by the I.D. and data given.
+     *
+     * @param id               is the entity type I.D.
+     * @param data             is the numerical data value for the entity. Data is only used for creepers states (charged vs. non-charged), villagers (professions), and sheep (colors).
+     *                         Giving a data value of -1 will result in the general name for such an entity, e.g. "sheep" rather than "white sheep" or "orange sheep".
+     * @param give_data_suffix specifies whether or not the name of the entity should include the numerical data value at the end of the item name in parentheses (e.g.
+     *                         "a trapdoor <b>(16)</b>"). For logging purposes in myGuardDog, for example, we should be as specific as possible on information about the item, so this
+     *                         argument should be <b>true</b>. However, for messages to users for commands like <i>/eid</i>, the data suffix is not helpful and looks awkward, so this
+     *                         argument should be <b>false</b>.
+     * @param singular         specifies whether the entity name returned should be returned in the singular form (e.g. "a creeper") or in the plural form (e.g. "creepers"). Singular forms
+     *                         include an article at the beginning.
+     * @param without_article  specifies whether or not the article should be excluded from the item name returned. Plural item names are preceded by "some"; singular item names can be
+     *                         preceded by "some", "a", "an", or "the".
      * @return the name of the entity specified by the I.D. and data given.
-     * @see {@link #getEntityName(Entity, boolean, boolean) getEntityName(Entity, boolean, boolean)} */
+     * @see {@link #getEntityName(Entity, boolean, boolean) getEntityName(Entity, boolean, boolean)}
+     */
     public static String getEntityName(int id, int data, boolean give_data_suffix, boolean singular, boolean without_article) {
         // return null if the I.D. is inside a gap
         for (short[] gap : ENTITY_GAPS)
@@ -1412,7 +1448,7 @@ public class myPluginWiki extends JavaPlugin {
         // if the item is singular and we want no article, remove the preexisting article
         if (singular && without_article)
             entity = entity.substring(entity.split(" ")[0].length() + 1);
-        // if the item is plural and we want an article, just add a "some" to the beginning
+            // if the item is plural and we want an article, just add a "some" to the beginning
         else if (!singular && !without_article)
             entity = "some " + entity;
         return entity;
@@ -1436,8 +1472,8 @@ public class myPluginWiki extends JavaPlugin {
                     // one is a block I.D., then change the current result to this new entity
                     if (contains_query
                             && (result_id == null || ENCHANTMENT_IDS[result_id][result_i].length() > ENCHANTMENT_IDS[id][i].length() || (ENCHANTMENT_IDS[result_id][result_i]
-                                    .length() == ENCHANTMENT_IDS[id][i].length()
-                                    && result_id < 256 && id >= 256))) {
+                            .length() == ENCHANTMENT_IDS[id][i].length()
+                            && result_id < 256 && id >= 256))) {
                         result_id = id;
                         result_i = i;
                     }
@@ -1529,41 +1565,41 @@ public class myPluginWiki extends JavaPlugin {
     public static Block getOtherHalfOfLargeChest(Block first_half) {
         if (first_half.getType() != Material.CHEST && first_half.getType() != Material.TRAPPED_CHEST)
             return null;
-        BlockFace[] relevant_block_faces = new BlockFace[] { BlockFace.NORTH, BlockFace.SOUTH, BlockFace.WEST, BlockFace.EAST };
+        BlockFace[] relevant_block_faces = new BlockFace[]{ BlockFace.NORTH, BlockFace.SOUTH, BlockFace.WEST, BlockFace.EAST };
         for (BlockFace face : relevant_block_faces)
             if (first_half.getRelative(face).getType() == first_half.getType())
                 return first_half.getRelative(face);
         return null;
     }
 
-    /** <b>This method has not been written yet!</b> This method returns a four-line String describing the recipe for crafting the specified item indicated by the provided I.D.
+    /**
+     * <b>This method has not been written yet!</b> This method returns a four-line String describing the recipe for crafting the specified item indicated by the provided I.D.
      * This String can be color coded and displayed in the Minecraft chat or console to describe how to craft the item indicated.
-     * 
-     * @param id
-     *            is the I.D. of the item or block for which the recipe was requested.
-     * @param data
-     *            is the numerical data value for the item or block. A value of -1 for <b><tt>data</b></tt> will cause this method to return the general recipe for the general
-     *            item.
+     *
+     * @param id   is the I.D. of the item or block for which the recipe was requested.
+     * @param data is the numerical data value for the item or block. A value of -1 for <b><tt>data</b></tt> will cause this method to return the general recipe for the general
+     *             item.
      * @return a four-line String describing the recipe for crafting the specified item indicated by the provided I.D.
-     * @see {@link #getRecipe(String) getRecipe(String)} and {@link #getRecipe(ItemStack) getRecipe(ItemStack)} */
+     * @see {@link #getRecipe(String) getRecipe(String)} and {@link #getRecipe(ItemStack) getRecipe(ItemStack)}
+     */
     public static String getRecipe(int id, int data) {
         // TODO
         return ChatColor.GOLD + "Coming soon to a server near you!";
     }
 
-    /** This method will tell whether or not a certain block will break if the block that it is attached to is broken. No data value is required as input for this method
+    /**
+     * This method will tell whether or not a certain block will break if the block that it is attached to is broken. No data value is required as input for this method
      * because items with the same I.D. consistently have this property in common.
-     * 
-     * @param id
-     *            is the I.D. of the block that needs to be checked for the "must be attached" property.
-     * @param bottom_only
-     *            indicates whether the method should return <b>true</b> only <b>1)</b> if the item is one that must be attached on the bottom only like redstone wire or a
-     *            lily pad (indicated by a <b>true</b> value), <b>2)</b> if the item is one that can be attached sideways like a torch or a wall sign (indicated by a
-     *            <b>false</b> value), or <b>3)</b> if the item needs to be attached on the bottom or sideways (indicated by a <b>null</b> value).
+     *
+     * @param id          is the I.D. of the block that needs to be checked for the "must be attached" property.
+     * @param bottom_only indicates whether the method should return <b>true</b> only <b>1)</b> if the item is one that must be attached on the bottom only like redstone wire or a
+     *                    lily pad (indicated by a <b>true</b> value), <b>2)</b> if the item is one that can be attached sideways like a torch or a wall sign (indicated by a
+     *                    <b>false</b> value), or <b>3)</b> if the item needs to be attached on the bottom or sideways (indicated by a <b>null</b> value).
      * @return <b>true</b> if the block given by the I.D. will break if the block it is attached to breaks and it attaches in the way indicated by <b> <tt>bottom_only</tt>
-     *         </b>, <b>false</b> if the block does not need to be attached to another block or not in the way specified by <tt><b>bottom_only</tt></b>, and <b>null</b> if the
-     *         I.D. given does not apply to a block at all.
-     * @see {@link #mustBeAttached(String, Boolean) mustBeAttached(String, Boolean)} and {@link #mustBeAttached(Block, Boolean) mustBeAttached(Block, Boolean)} */
+     * </b>, <b>false</b> if the block does not need to be attached to another block or not in the way specified by <tt><b>bottom_only</tt></b>, and <b>null</b> if the
+     * I.D. given does not apply to a block at all.
+     * @see {@link #mustBeAttached(String, Boolean) mustBeAttached(String, Boolean)} and {@link #mustBeAttached(Block, Boolean) mustBeAttached(Block, Boolean)}
+     */
     public static Boolean mustBeAttached(int id, Boolean bottom_only) {
         // return null if the I.D. doesn't belong to anything or is an item I.D. instead of a block I.D.
         if (getItemName(id, -1, false, false, true) == null || id >= 256)
@@ -1579,19 +1615,19 @@ public class myPluginWiki extends JavaPlugin {
         return false;
     }
 
-    /** This method will tell whether or not a certain block can be locked (meaning that it's either a container--a block that contain other items, e.g. a chest--or a switch--a
+    /**
+     * This method will tell whether or not a certain block can be locked (meaning that it's either a container--a block that contain other items, e.g. a chest--or a switch--a
      * block that can be pressed or toggled on and off, e.g. a button--or a portal block--a block that can be opened and closed, e.g. a door). No data value is required as
      * input for this method because items with the same I.D. consistently have this property in common.
-     * 
-     * @param id
-     *            is the I.D. of the block that needs to be checked for the "lockable" property.
-     * @param has_inventory
-     *            indicates whether the method should return <b>true</b> only <b>1)</b> if the block is a container (indicated by a <b>true</b> value), <b>2)</b> if the block
-     *            is not a container (indicated by a <b>false</b> value), or <b>3)</b> if the block is any kind of lockable block (indicated by a <b>null</b> value).
+     *
+     * @param id            is the I.D. of the block that needs to be checked for the "lockable" property.
+     * @param has_inventory indicates whether the method should return <b>true</b> only <b>1)</b> if the block is a container (indicated by a <b>true</b> value), <b>2)</b> if the block
+     *                      is not a container (indicated by a <b>false</b> value), or <b>3)</b> if the block is any kind of lockable block (indicated by a <b>null</b> value).
      * @return <b>true</b> if the block given by the I.D. can be locked and it does or does not have an inventory in the way indicated by <b> <tt>has_inventory</tt></b>,
-     *         <b>false</b> if the block cannot be locked or does or does not have an inventory opposite the requirement indicated by <tt><b>has_inventory</tt></b>, and
-     *         <b>null</b> if the I.D. given does not apply to a block at all.
-     * @see {@link #isLockable(String, Boolean) isLockable(String, Boolean)} and {@link #isLockable(Block, Boolean) isLockable(Block, Boolean)} */
+     * <b>false</b> if the block cannot be locked or does or does not have an inventory opposite the requirement indicated by <tt><b>has_inventory</tt></b>, and
+     * <b>null</b> if the I.D. given does not apply to a block at all.
+     * @see {@link #isLockable(String, Boolean) isLockable(String, Boolean)} and {@link #isLockable(Block, Boolean) isLockable(Block, Boolean)}
+     */
     public static Boolean isLockable(int id) {
         if (getItemName(id, -1, false, true, true) == null)
             return null;
@@ -1649,13 +1685,14 @@ public class myPluginWiki extends JavaPlugin {
         return false;
     }
 
-    /** This method will tell whether or not a certain block is solid. Mobs can walk on solid blocks without falling through them (e.g. grass blocks) while they simply fall
+    /**
+     * This method will tell whether or not a certain block is solid. Mobs can walk on solid blocks without falling through them (e.g. grass blocks) while they simply fall
      * through non-solid blocks (e.g. signs). No data value is required as input for this method because items with the same I.D. consistently have this property in common.
-     * 
-     * @param id
-     *            is the I.D. of the block that needs to be checked for the "solid" property.
+     *
+     * @param id is the I.D. of the block that needs to be checked for the "solid" property.
      * @return <b>true</b> if the block given by the I.D. is solid, <b>false</b> if the block given is not solid, or <b>null</b> if the I.D. given does not apply to a block at
-     *         all. */
+     * all.
+     */
     public static Boolean isSolid(int id) {
         if (getItemName(id, -1, false, true, true) == null)
             return null;
@@ -1665,12 +1702,13 @@ public class myPluginWiki extends JavaPlugin {
         return true;
     }
 
-    /** This method checks to see if the given block is not the height of a full block. This can be true if <b>1)</b> the block is a half slab in the lower position, <b>2)</b>
+    /**
+     * This method checks to see if the given block is not the height of a full block. This can be true if <b>1)</b> the block is a half slab in the lower position, <b>2)</b>
      * the block is less than one full block tall, or <b>3)</b> the block directly below the given block is more than one full block tall such as a fence or fence gate.
-     * 
-     * @param block
-     *            is the Block that is being checked for partial height.
-     * @return <b>true</b> if <b><tt>block</b></tt> is */
+     *
+     * @param block is the Block that is being checked for partial height.
+     * @return <b>true</b> if <b><tt>block</b></tt> is
+     */
     public static boolean topsAtPartialBlockHeight(Block block) {
         // if the block is a half slab, but it's in the higher position (data > 8), then it's not at half height, so return false
         if (block.getTypeId() == 44 && block.getData() >= 8)
@@ -1721,40 +1759,41 @@ public class myPluginWiki extends JavaPlugin {
     }
 
     // alternate input, output, or name methods
-    /** This method returns a two-item Integer array or <b>null</b>. <tt>[0]</tt> is the I.D. of the item given by <tt>item_name</tt>. <tt>[1]</tt> is the data value of the
+
+    /**
+     * This method returns a two-item Integer array or <b>null</b>. <tt>[0]</tt> is the I.D. of the item given by <tt>item_name</tt>. <tt>[1]</tt> is the data value of the
      * item given, e.g. 2 for birch wood (because all logs have the I.D. 17, but a data value of 2 refers to birch wood specifically). If <tt><b>item_name</b></tt> specifies a
      * general item name such as "logs", the data value returned will be -1.
-     * 
-     * @param item_name
-     *            is the name of the item or block type that was specified split into separate words.
-     * @param item_ID
-     *            is <b>true</b> if this method should only return item I.D.s and not block type I.D.s, <b>false</b> if this method should only return block type I.D.s and not
-     *            item I.D.s, or <b>null</b> if it should return either item I.D.s or block type I.D.s, in which case it will proritize item I.D.s over block type I.D.s.
+     *
+     * @param item_name is the name of the item or block type that was specified split into separate words.
+     * @param item_ID   is <b>true</b> if this method should only return item I.D.s and not block type I.D.s, <b>false</b> if this method should only return block type I.D.s and not
+     *                  item I.D.s, or <b>null</b> if it should return either item I.D.s or block type I.D.s, in which case it will proritize item I.D.s over block type I.D.s.
      * @return the I.D. and numerical data value for the item given by name in <tt><b>item_name</tt></b> in a two-item Integer array or <tt><b>null</b></tt> if <b>1)</b> the
-     *         item specified does not exist or <b>2)</b> the object specified is an item, not a block type, and it was specified in <tt><b>item_ID</b></tt> that this method
-     *         should only return block types or vice versa.
+     * item specified does not exist or <b>2)</b> the object specified is an item, not a block type, and it was specified in <tt><b>item_ID</b></tt> that this method
+     * should only return block types or vice versa.
      * @NOTE This method returns both the I.D. and the data value of an item based on the item's name because it encourages the programmer to only use this method once as
-     *       necessary, not once to get the I.D. and again to get the data. It is a long, somewhat complex method and it must search through hundreds and hundreds of Strings
-     *       in the <tt>ITEM_IDS</tt> array to find a match. This method should only be called when necessary and results returned by this method should be stored in a
-     *       variable if needed more than once; do not simply call this method a second time.
+     * necessary, not once to get the I.D. and again to get the data. It is a long, somewhat complex method and it must search through hundreds and hundreds of Strings
+     * in the <tt>ITEM_IDS</tt> array to find a match. This method should only be called when necessary and results returned by this method should be stored in a
+     * variable if needed more than once; do not simply call this method a second time.
      * @see {@link #getItemIdAndData(String[], Boolean) getItemIdAndData(String[], Boolean)}, {@link #getItemIdAndDataString(String[], Boolean)
-     *      getItemIdAndDataString(String[], Boolean)}, and {@link #getItemIdAndDataString(String, Boolean) getItemIdAndDataString(String, Boolean)} */
+     * getItemIdAndDataString(String[], Boolean)}, and {@link #getItemIdAndDataString(String, Boolean) getItemIdAndDataString(String, Boolean)}
+     */
     public static Integer[] getItemIdAndData(String item_name, Boolean item_ID) {
         return getItemIdAndData(item_name.replaceAll("_", " ").split(" "), item_ID);
     }
 
-    /** This method returns a String describing the id and data of the item specified or <b>null</b>.
-     * 
-     * @param item_name
-     *            is the name of the item or block type that was specified split into separate words.
-     * @param item_ID
-     *            is <b>true</b> if this method should only return item I.D.s and not block type I.D.s, <b>false</b> if this method should only return block type I.D.s and not
-     *            item I.D.s, or <b>null</b> if it should return either item I.D.s or block type I.D.s, in which case it will proritize item I.D.s over block type I.D.s.
+    /**
+     * This method returns a String describing the id and data of the item specified or <b>null</b>.
+     *
+     * @param item_name is the name of the item or block type that was specified split into separate words.
+     * @param item_ID   is <b>true</b> if this method should only return item I.D.s and not block type I.D.s, <b>false</b> if this method should only return block type I.D.s and not
+     *                  item I.D.s, or <b>null</b> if it should return either item I.D.s or block type I.D.s, in which case it will proritize item I.D.s over block type I.D.s.
      * @return the I.D. and numerical data value for the item given by name in <tt><b>item_name</tt></b> in a String formatted as "[id]" if data < 1 or "[id]:[data]" otherwise
-     *         or <tt><b>null</b></tt> if <b>1)</b> the item specified does not exist or <b>2)</b> the object specified is an item, not a block type, and it was specified in
-     *         <tt><b>item_ID</b></tt> that this method should only return block types or vice versa.
+     * or <tt><b>null</b></tt> if <b>1)</b> the item specified does not exist or <b>2)</b> the object specified is an item, not a block type, and it was specified in
+     * <tt><b>item_ID</b></tt> that this method should only return block types or vice versa.
      * @see {@link #getItemIdAndData(String[], Boolean) getItemIdAndData(String[], Boolean)}, {@link #getItemIdAndData(String, Boolean) getItemIdAndData(String, Boolean)}, and
-     *      {@link #getItemIdAndDataString(String, Boolean) getItemIdAndDataString(String, Boolean)} */
+     * {@link #getItemIdAndDataString(String, Boolean) getItemIdAndDataString(String, Boolean)}
+     */
     public static String getItemIdAndDataString(String[] item_name, Boolean item_ID) {
         Integer[] id_and_data = getItemIdAndData(item_name, item_ID);
         if (id_and_data == null)
@@ -1765,98 +1804,96 @@ public class myPluginWiki extends JavaPlugin {
         return result;
     }
 
-    /** This method returns a String describing the id and data of the item specified or <b>null</b>. The String is equivalent to <tt>String.valueOf(</tt>the I.D. of the item
+    /**
+     * This method returns a String describing the id and data of the item specified or <b>null</b>. The String is equivalent to <tt>String.valueOf(</tt>the I.D. of the item
      * or block specified<tt>)</tt> if data < 1, but if data > 0, the String is formatted as "[id]:[data]". If <tt><b>item_name</b></tt> specifies a general item name such as
      * "logs", the data value returned will be -1; therefore, no data will be included in the String returned.
-     * 
-     * @param item_name
-     *            is the name of the item or block type that was specified split into separate words.
-     * @param item_ID
-     *            is <b>true</b> if this method should only return item I.D.s and not block type I.D.s, <b>false</b> if this method should only return block type I.D.s and not
-     *            item I.D.s, or <b>null</b> if it should return either item I.D.s or block type I.D.s, in which case it will proritize item I.D.s over block type I.D.s.
+     *
+     * @param item_name is the name of the item or block type that was specified split into separate words.
+     * @param item_ID   is <b>true</b> if this method should only return item I.D.s and not block type I.D.s, <b>false</b> if this method should only return block type I.D.s and not
+     *                  item I.D.s, or <b>null</b> if it should return either item I.D.s or block type I.D.s, in which case it will proritize item I.D.s over block type I.D.s.
      * @return the I.D. and numerical data value for the item given by name in <tt><b>item_name</tt></b> in a String formatted as "[id]" if data < 1 or "[id]:[data]" otherwise
-     *         or <tt><b>null</b></tt> if <b>1)</b> the item specified does not exist or <b>2)</b> the object specified is an item, not a block type, and it was specified in
-     *         <tt><b>item_ID</b></tt> that this method should only return block types or vice versa.
+     * or <tt><b>null</b></tt> if <b>1)</b> the item specified does not exist or <b>2)</b> the object specified is an item, not a block type, and it was specified in
+     * <tt><b>item_ID</b></tt> that this method should only return block types or vice versa.
      * @see {@link #getItemIdAndData(String[], Boolean) getItemIdAndData(String[], Boolean)}, {@link #getItemIdAndData(String, Boolean) getItemIdAndData(String, Boolean)}, and
-     *      {@link #getItemIdAndDataString(String[], Boolean) getItemIdAndDataString(String[], Boolean)} */
+     * {@link #getItemIdAndDataString(String[], Boolean) getItemIdAndDataString(String[], Boolean)}
+     */
     public static String getItemIdAndDataString(String item_name, Boolean item_ID) {
         return getItemIdAndDataString(item_name.replaceAll("_", " ").split(" "), item_ID);
     }
 
-    /** This method returns the name of the item given.
-     * 
-     * @param item
-     *            is the ItemStack which is being named.
-     * @param give_data_suffix
-     *            specifies whether or not the name of the item should include the numerical data value at the end of the item name in parentheses (e.g.
-     *            "a trapdoor <b>(16)</b>"). For logging purposes in myGuardDog, for example, we should be as specific as possible on information about the item, so this
-     *            argument should be <b>true</b>. However, for messages to users for commands like <i>/id</i>, the data suffix is not helpful and looks awkward, so this
-     *            argument should be <b>false</b>.
-     * @param singular
-     *            specifies whether the item name returned should be returned in the singular form (e.g. "a lever") or in the plural form (e.g. "levers"). Singular forms
-     *            include an article at the beginning. Non-countable items like grass are the same as their plural forms, but with "some" at the beginning ("grass" -->
-     *            "some grass").
-     * @param without_article
-     *            specifies whether or not the article should be excluded from the item name returned. Plural item names are preceded by "some"; singular item names can be
-     *            preceded by "some", "a", "an", or "the".
+    /**
+     * This method returns the name of the item given.
+     *
+     * @param item             is the ItemStack which is being named.
+     * @param give_data_suffix specifies whether or not the name of the item should include the numerical data value at the end of the item name in parentheses (e.g.
+     *                         "a trapdoor <b>(16)</b>"). For logging purposes in myGuardDog, for example, we should be as specific as possible on information about the item, so this
+     *                         argument should be <b>true</b>. However, for messages to users for commands like <i>/id</i>, the data suffix is not helpful and looks awkward, so this
+     *                         argument should be <b>false</b>.
+     * @param singular         specifies whether the item name returned should be returned in the singular form (e.g. "a lever") or in the plural form (e.g. "levers"). Singular forms
+     *                         include an article at the beginning. Non-countable items like grass are the same as their plural forms, but with "some" at the beginning ("grass" -->
+     *                         "some grass").
+     * @param without_article  specifies whether or not the article should be excluded from the item name returned. Plural item names are preceded by "some"; singular item names can be
+     *                         preceded by "some", "a", "an", or "the".
      * @return the name of the item specified by the item or block type I.D. and data given.
      * @see {@link #getItemName(int, int, boolean, boolean, boolean) getItemName(int, int, boolean, boolean, boolean)} and {@link #getItemName(Block, boolean, boolean)
-     *      getItemName(Block, boolean, boolean)} */
+     * getItemName(Block, boolean, boolean)}
+     */
     public static String getItemName(ItemStack item, boolean give_data_suffix, boolean singular, boolean without_article) {
         return getItemName(item.getTypeId(), item.getData().getData(), give_data_suffix, singular, without_article);
     }
 
-    /** This method returns the name of the block given.
-     * 
-     * @param block
-     *            is the Block which is being named.
-     * @param give_data_suffix
-     *            specifies whether or not the name of the item should include the numerical data value at the end of the item name in parentheses (e.g.
-     *            "a trapdoor <b>(16)</b>"). For logging purposes in myGuardDog, for example, we should be as specific as possible on information about the item, so this
-     *            argument should be <b>true</b>. However, for messages to users for commands like <i>/id</i>, the data suffix is not helpful and looks awkward, so this
-     *            argument should be <b>false</b>.
-     * @param singular
-     *            specifies whether the item name returned should be returned in the singular form (e.g. "a lever") or in the plural form (e.g. "levers"). Singular forms
-     *            include an article at the beginning. Non-countable items like grass are the same as their plural forms, but with "some" at the beginning ("grass" -->
-     *            "some grass").
-     * @param without_article
-     *            specifies whether or not the article should be excluded from the item name returned. Plural item names are preceded by "some"; singular item names can be
-     *            preceded by "some", "a", "an", or "the".
+    /**
+     * This method returns the name of the block given.
+     *
+     * @param block            is the Block which is being named.
+     * @param give_data_suffix specifies whether or not the name of the item should include the numerical data value at the end of the item name in parentheses (e.g.
+     *                         "a trapdoor <b>(16)</b>"). For logging purposes in myGuardDog, for example, we should be as specific as possible on information about the item, so this
+     *                         argument should be <b>true</b>. However, for messages to users for commands like <i>/id</i>, the data suffix is not helpful and looks awkward, so this
+     *                         argument should be <b>false</b>.
+     * @param singular         specifies whether the item name returned should be returned in the singular form (e.g. "a lever") or in the plural form (e.g. "levers"). Singular forms
+     *                         include an article at the beginning. Non-countable items like grass are the same as their plural forms, but with "some" at the beginning ("grass" -->
+     *                         "some grass").
+     * @param without_article  specifies whether or not the article should be excluded from the item name returned. Plural item names are preceded by "some"; singular item names can be
+     *                         preceded by "some", "a", "an", or "the".
      * @return the name of the item specified by the item or block type I.D. and data given.
      * @see {@link #getItemName(int, int, boolean, boolean, boolean) getItemName(int, int, boolean, boolean, boolean)} and {@link #getItemName(ItemStack, boolean, boolean)
-     *      getItemName(ItemStack, boolean, boolean)} */
+     * getItemName(ItemStack, boolean, boolean)}
+     */
     public static String getItemName(Block block, boolean give_data_suffix, boolean singular, boolean without_article) {
         return getItemName(block.getTypeId(), block.getData(), give_data_suffix, singular, without_article);
     }
 
-    /** This method returns a two-item Integer array or <b>null</b>. <tt>[0]</tt> is the I.D. of the entity given by <tt>entity_name</tt>. <tt>[1]</tt> is the data value of the
+    /**
+     * This method returns a two-item Integer array or <b>null</b>. <tt>[0]</tt> is the I.D. of the entity given by <tt>entity_name</tt>. <tt>[1]</tt> is the data value of the
      * item given, e.g. 1 for charged creepers (because all creepers have the I.D. 50, but a data value of 1 refers to charged creepers specifically). If
      * <tt><b>entity_name</b></tt> specifies a general item name such as "creepers", the data value returned will be -1.
-     * 
-     * @param entity_name
-     *            is the name of the entity that was specified.
+     *
+     * @param entity_name is the name of the entity that was specified.
      * @return the I.D. and numerical data value for the item given by name in <tt><b>entity_name</tt></b> in a two-item Integer array or <tt><b>null</b></tt> if the item
-     *         specified does not exist.
-     * @see {@link #getEntityIdAndData(String[]) getEntityIdAndData(String[])}, {@link #getEntityIdAndDataString(String[]) getEntityIdAndDataString(String[])}, and
-     *      {@link #getEntityIdAndDataString(String) getEntityIdAndDataString(String)}
+     * specified does not exist.
      * @NOTE This method returns both the I.D. and the data value of an entity based on the entity's name because it encourages the programmer to only use this method once as
-     *       necessary, not once to get the I.D. and again to get the data. It is a long, somewhat complex method and it must search through hundreds of Strings in the
-     *       <tt>ENTITY_IDS</tt> array to find a match. This method should only be called when necessary and results returned by this method should be stored in a variable if
-     *       needed more than once; do not simply call this method a second time. */
+     * necessary, not once to get the I.D. and again to get the data. It is a long, somewhat complex method and it must search through hundreds of Strings in the
+     * <tt>ENTITY_IDS</tt> array to find a match. This method should only be called when necessary and results returned by this method should be stored in a variable if
+     * needed more than once; do not simply call this method a second time.
+     * @see {@link #getEntityIdAndData(String[]) getEntityIdAndData(String[])}, {@link #getEntityIdAndDataString(String[]) getEntityIdAndDataString(String[])}, and
+     * {@link #getEntityIdAndDataString(String) getEntityIdAndDataString(String)}
+     */
     public static Integer[] getEntityIdAndData(String entity_name) {
         return getEntityIdAndData(entity_name.replaceAll("_", " ").split(" "));
     }
 
-    /** This method returns a String describing the id and data of the entity specified or <b>null</b>. The String is equivalent to <tt>String.valueOf(</tt>the I.D. of the item
+    /**
+     * This method returns a String describing the id and data of the entity specified or <b>null</b>. The String is equivalent to <tt>String.valueOf(</tt>the I.D. of the item
      * or block specified<tt>)</tt> if data < 1, but if data > 0, the String is formatted as "[id]:[data]". If <tt><b>entity_name</b></tt> specifies a general item name such
      * as "thrown potions", the data value returned will be -1; therefore, no data will be included in the String returned.
-     * 
-     * @param entity_name
-     *            is the name of the item or block type that was specified.
+     *
+     * @param entity_name is the name of the item or block type that was specified.
      * @return the I.D. and numerical data value for the entity given by name in <tt><b>entity_name</tt></b> in a String formatted as "[id]" if data < 1 or "[id]:[data]"
-     *         otherwise or <tt><b>null</b></tt> if the entity specified does not exist.
+     * otherwise or <tt><b>null</b></tt> if the entity specified does not exist.
      * @see {@link #getEntityIdAndData(String[], Boolean) getEntityIdAndData(String[], Boolean)}, {@link #getEntityIdAndData(String, Boolean) getEntityIdAndData(String,
-     *      Boolean)}, and {@link #getEntityIdAndDataString(String, Boolean) getEntityIdAndDataString(String, Boolean)} */
+     * Boolean)}, and {@link #getEntityIdAndDataString(String, Boolean) getEntityIdAndDataString(String, Boolean)}
+     */
     public static String getEntityIdAndDataString(String[] entity_name) {
         Integer[] id_and_data = getEntityIdAndData(entity_name);
         if (id_and_data == null)
@@ -1867,37 +1904,36 @@ public class myPluginWiki extends JavaPlugin {
         return result;
     }
 
-    /** This method returns a String describing the id and data of the entity specified or <b>null</b>. The String is equivalent to <tt>String.valueOf(</tt>the I.D. of the item
+    /**
+     * This method returns a String describing the id and data of the entity specified or <b>null</b>. The String is equivalent to <tt>String.valueOf(</tt>the I.D. of the item
      * or block specified<tt>)</tt> if data < 1, but if data > 0, the String is formatted as "[id]:[data]". If <tt><b>entity_name</b></tt> specifies a general item name such
      * as "thrown potions", the data value returned will be -1; therefore, no data will be included in the String returned.
-     * 
-     * @param entity_name
-     *            is the name of the item or block type that was specified.
+     *
+     * @param entity_name is the name of the item or block type that was specified.
      * @return the I.D. and numerical data value for the entity given by name in <tt><b>entity_name</tt></b> in a String formatted as "[id]" if data < 1 or "[id]:[data]"
-     *         otherwise or <tt><b>null</b></tt> if the entity specified does not exist.
+     * otherwise or <tt><b>null</b></tt> if the entity specified does not exist.
      * @see {@link #getEntityIdAndData(String[], Boolean) getEntityIdAndData(String[], Boolean)}, {@link #getEntityIdAndData(String, Boolean) getEntityIdAndData(String,
-     *      Boolean)}, and {@link #getEntityIdAndDataString(String[], Boolean) getEntityIdAndDataString(String[], Boolean)} */
+     * Boolean)}, and {@link #getEntityIdAndDataString(String[], Boolean) getEntityIdAndDataString(String[], Boolean)}
+     */
     public static String getEntityIdAndDataString(String entity_name) {
         return getEntityIdAndDataString(entity_name.replaceAll("_", " ").split(" "));
     }
 
-    /** This method returns the name of the entity specified.
-     * 
-     * @param entity
-     *            is the Entity that will be named.
-     * @param give_data_suffix
-     *            specifies whether or not the name of the entity should include the numerical data value at the end of the item name in parentheses (e.g.
-     *            "a trapdoor <b>(16)</b>"). For logging purposes in myGuardDog, for example, we should be as specific as possible on information about the item, so this
-     *            argument should be <b>true</b>. However, for messages to users for commands like <i>/eid</i>, the data suffix is not helpful and looks awkward, so this
-     *            argument should be <b>false</b>.
-     * @param singular
-     *            specifies whether the entity name returned should be returned in the singular form (e.g. "a creeper") or in the plural form (e.g. "creepers"). Singular forms
-     *            include an article at the beginning.
-     * @param without_article
-     *            specifies whether or not the article should be excluded from the item name returned. Plural item names are preceded by "some"; singular item names can be
-     *            preceded by "some", "a", "an", or "the".
+    /**
+     * This method returns the name of the entity specified.
+     *
+     * @param entity           is the Entity that will be named.
+     * @param give_data_suffix specifies whether or not the name of the entity should include the numerical data value at the end of the item name in parentheses (e.g.
+     *                         "a trapdoor <b>(16)</b>"). For logging purposes in myGuardDog, for example, we should be as specific as possible on information about the item, so this
+     *                         argument should be <b>true</b>. However, for messages to users for commands like <i>/eid</i>, the data suffix is not helpful and looks awkward, so this
+     *                         argument should be <b>false</b>.
+     * @param singular         specifies whether the entity name returned should be returned in the singular form (e.g. "a creeper") or in the plural form (e.g. "creepers"). Singular forms
+     *                         include an article at the beginning.
+     * @param without_article  specifies whether or not the article should be excluded from the item name returned. Plural item names are preceded by "some"; singular item names can be
+     *                         preceded by "some", "a", "an", or "the".
      * @return the name of the entity specified.
-     * @see {@link #getEntityName(int, int, boolean, boolean) getEntityName(int, int, boolean, boolean)} */
+     * @see {@link #getEntityName(int, int, boolean, boolean) getEntityName(int, int, boolean, boolean)}
+     */
     public static String getEntityName(Entity entity, boolean give_data_suffix, boolean singular, boolean without_article) {
         int data = -1;
         if (entity.getType() == EntityType.VILLAGER)
@@ -1917,24 +1953,22 @@ public class myPluginWiki extends JavaPlugin {
         return getEntityName(entity.getType().getTypeId(), data, give_data_suffix, singular, without_article);
     }
 
-    /** This method returns the name of the entity type specified.
-     * 
-     * @param type
-     *            is the EntityType that will be named. EntityTypes cannot contain special data such as sheep color or villager profession, so if possible, consider using
-     *            {@link #getEntityName(Entity, boolean, boolean, boolean) getEntityName(Entity, boolean, boolean, boolean)} instead.
-     * @param give_data_suffix
-     *            specifies whether or not the name of the entity should include the numerical data value at the end of the item name in parentheses (e.g.
-     *            "a trapdoor <b>(16)</b>"). For logging purposes in myGuardDog, for example, we should be as specific as possible on information about the item, so this
-     *            argument should be <b>true</b>. However, for messages to users for commands like <i>/eid</i>, the data suffix is not helpful and looks awkward, so this
-     *            argument should be <b>false</b>.
-     * @param singular
-     *            specifies whether the entity name returned should be returned in the singular form (e.g. "a creeper") or in the plural form (e.g. "creepers"). Singular forms
-     *            include an article at the beginning.
-     * @param without_article
-     *            specifies whether or not the article should be excluded from the item name returned. Plural item names are preceded by "some"; singular item names can be
-     *            preceded by "some", "a", "an", or "the".
+    /**
+     * This method returns the name of the entity type specified.
+     *
+     * @param type             is the EntityType that will be named. EntityTypes cannot contain special data such as sheep color or villager profession, so if possible, consider using
+     *                         {@link #getEntityName(Entity, boolean, boolean, boolean) getEntityName(Entity, boolean, boolean, boolean)} instead.
+     * @param give_data_suffix specifies whether or not the name of the entity should include the numerical data value at the end of the item name in parentheses (e.g.
+     *                         "a trapdoor <b>(16)</b>"). For logging purposes in myGuardDog, for example, we should be as specific as possible on information about the item, so this
+     *                         argument should be <b>true</b>. However, for messages to users for commands like <i>/eid</i>, the data suffix is not helpful and looks awkward, so this
+     *                         argument should be <b>false</b>.
+     * @param singular         specifies whether the entity name returned should be returned in the singular form (e.g. "a creeper") or in the plural form (e.g. "creepers"). Singular forms
+     *                         include an article at the beginning.
+     * @param without_article  specifies whether or not the article should be excluded from the item name returned. Plural item names are preceded by "some"; singular item names can be
+     *                         preceded by "some", "a", "an", or "the".
      * @return the name of the entity type specified.
-     * @see {@link #getEntityName(int, int, boolean, boolean) getEntityName(int, int, boolean, boolean)} */
+     * @see {@link #getEntityName(int, int, boolean, boolean) getEntityName(int, int, boolean, boolean)}
+     */
     public static String getEntityName(EntityType type, boolean give_data_suffix, boolean singular, boolean without_article) {
         return getEntityName(type.getTypeId(), -1, give_data_suffix, singular, without_article);
     }
@@ -1966,13 +2000,14 @@ public class myPluginWiki extends JavaPlugin {
         return Enchantment.getById(id);
     }
 
-    /** This method returns a four-line String describing the recipe for crafting the specified item indicated by the provided name. This String can be color coded and
+    /**
+     * This method returns a four-line String describing the recipe for crafting the specified item indicated by the provided name. This String can be color coded and
      * displayed in the Minecraft chat or console to describe how to craft the item indicated.
-     * 
-     * @param item_name
-     *            is the name of the item specified
+     *
+     * @param item_name is the name of the item specified
      * @return a four-line String describing the recipe for crafting the specified item indicated by the provided I.D.
-     * @see {@link #getRecipe(int, int) getRecipe(int, int)} and {@link #getRecipe(ItemStack) getRecipe(ItemStack)} */
+     * @see {@link #getRecipe(int, int) getRecipe(int, int)} and {@link #getRecipe(ItemStack) getRecipe(ItemStack)}
+     */
     public static String getRecipe(String item_name) {
         Integer[] id_and_data = getItemIdAndData(item_name, null);
         if (id_and_data == null)
@@ -1980,43 +2015,44 @@ public class myPluginWiki extends JavaPlugin {
         return getRecipe(id_and_data[0], id_and_data[1]);
     }
 
-    /** This method returns a four-line String describing the recipe for crafting the specified item. This String can be color coded and displayed in the Minecraft chat or
+    /**
+     * This method returns a four-line String describing the recipe for crafting the specified item. This String can be color coded and displayed in the Minecraft chat or
      * console to describe how to craft the item indicated.
-     * 
-     * @param item
-     *            is the item specified.
+     *
+     * @param item is the item specified.
      * @return a four-line String describing the recipe for crafting the specified item indicated by the provided I.D.
-     * @see {@link #getRecipe(int, int) getRecipe(int, int)} and {@link #getRecipe(String) getRecipe(String)} */
+     * @see {@link #getRecipe(int, int) getRecipe(int, int)} and {@link #getRecipe(String) getRecipe(String)}
+     */
     public static String getRecipe(ItemStack item) {
         return getRecipe(item.getTypeId(), item.getData().getData());
     }
 
-    /** This method will tell whether or not the block specified will break if the block that it is attached to is broken.
-     * 
-     * @param block
-     *            is the block that needs to be checked for the "must be attached" property.
-     * @param bottom_only
-     *            indicates whether the method should return <b>true</b> only <b>1)</b> if the item is one that must be attached on the bottom only like redstone wire or a
-     *            lily pad (indicated by a <b>true</b> value), <b>2)</b> if the item is one that can be attached sideways like a torch or a wall sign (indicated by a
-     *            <b>false</b> value), or <b>3)</b> if the item needs to be attached on the bottom or sideways (indicated by a <b>null</b> value).
+    /**
+     * This method will tell whether or not the block specified will break if the block that it is attached to is broken.
+     *
+     * @param block       is the block that needs to be checked for the "must be attached" property.
+     * @param bottom_only indicates whether the method should return <b>true</b> only <b>1)</b> if the item is one that must be attached on the bottom only like redstone wire or a
+     *                    lily pad (indicated by a <b>true</b> value), <b>2)</b> if the item is one that can be attached sideways like a torch or a wall sign (indicated by a
+     *                    <b>false</b> value), or <b>3)</b> if the item needs to be attached on the bottom or sideways (indicated by a <b>null</b> value).
      * @return <b>true</b> if the block given by the I.D. will break if the block it is attached to breaks and it attaches in the way indicated by <b> <tt>bottom_only</tt></b>
-     *         or <b>false</b> if the block does not need to be attached to another block or not in the way specified by <tt><b>bottom_only</tt></b>.
-     * @see {@link #mustBeAttached(int, Boolean) mustBeAttached(int, Boolean)} and {@link #mustBeAttached(String, Boolean) mustBeAttached(String, Boolean)} */
+     * or <b>false</b> if the block does not need to be attached to another block or not in the way specified by <tt><b>bottom_only</tt></b>.
+     * @see {@link #mustBeAttached(int, Boolean) mustBeAttached(int, Boolean)} and {@link #mustBeAttached(String, Boolean) mustBeAttached(String, Boolean)}
+     */
     public static Boolean mustBeAttached(Block block, Boolean bottom_only) {
         return mustBeAttached(block.getTypeId(), bottom_only);
     }
 
-    /** This method will tell whether or not the block specified by the given name will break if the block that it is attached to is broken.
-     * 
-     * @param item_name
-     *            is the name of the block that needs to be checked for the "must be attached" property.
-     * @param bottom_only
-     *            indicates whether the method should return <b>true</b> only <b>1)</b> if the item is one that must be attached on the bottom only like redstone wire or a
-     *            lily pad (indicated by a <b>true</b> value), <b>2)</b> if the item is one that can be attached sideways like a torch or a wall sign (indicated by a
-     *            <b>false</b> value), or <b>3)</b> if the item needs to be attached on the bottom or sideways (indicated by a <b>null</b> value).
+    /**
+     * This method will tell whether or not the block specified by the given name will break if the block that it is attached to is broken.
+     *
+     * @param item_name   is the name of the block that needs to be checked for the "must be attached" property.
+     * @param bottom_only indicates whether the method should return <b>true</b> only <b>1)</b> if the item is one that must be attached on the bottom only like redstone wire or a
+     *                    lily pad (indicated by a <b>true</b> value), <b>2)</b> if the item is one that can be attached sideways like a torch or a wall sign (indicated by a
+     *                    <b>false</b> value), or <b>3)</b> if the item needs to be attached on the bottom or sideways (indicated by a <b>null</b> value).
      * @return <b>true</b> if the block given by the I.D. will break if the block it is attached to breaks and it attaches in the way indicated by <b> <tt>bottom_only</tt></b>
-     *         or <b>false</b> if the block does not need to be attached to another block or not in the way specified by <tt><b>bottom_only</tt></b>.
-     * @see {@link #mustBeAttached(int, Boolean) mustBeAttached(int, Boolean)} and {@link #mustBeAttached(Block, Boolean) mustBeAttached(Block, Boolean)} */
+     * or <b>false</b> if the block does not need to be attached to another block or not in the way specified by <tt><b>bottom_only</tt></b>.
+     * @see {@link #mustBeAttached(int, Boolean) mustBeAttached(int, Boolean)} and {@link #mustBeAttached(Block, Boolean) mustBeAttached(Block, Boolean)}
+     */
     public static Boolean mustBeAttached(String item_name, Boolean bottom_only) {
         Integer[] id = getItemIdAndData(item_name, false);
         if (id == null)
@@ -2025,53 +2061,55 @@ public class myPluginWiki extends JavaPlugin {
             return mustBeAttached(id[0], bottom_only);
     }
 
-    /** This method will tell whether or not a certain block will break if water or lava flows to it.
-     * 
-     * @param block
-     *            is the block that needs to be checked for the "can be broken by liquids" property.
+    /**
+     * This method will tell whether or not a certain block will break if water or lava flows to it.
+     *
+     * @param block is the block that needs to be checked for the "can be broken by liquids" property.
      * @return <b>true</b> if the block given will break if water or lava flows to it or <b>false</b> if the block will hold back water or lava.
-     * @see {@link #canBeBrokenByLiquids(String) canBeBrokenByLiquids(String)} and {@link #canBeBrokenByLiquids(Block) canBeBrokenByLiquids(Block)} */
+     * @see {@link #canBeBrokenByLiquids(String) canBeBrokenByLiquids(String)} and {@link #canBeBrokenByLiquids(Block) canBeBrokenByLiquids(Block)}
+     */
     public static Boolean canBeBrokenByLiquids(Block block) {
         return canBeBrokenByLiquids(block.getTypeId());
     }
 
-    /** This method will tell whether or not a certain block will break if water or lava flows to it.
-     * 
-     * @param item_name
-     *            is the name of the block that needs to be checked for the "can be broken by liquids" property.
+    /**
+     * This method will tell whether or not a certain block will break if water or lava flows to it.
+     *
+     * @param item_name is the name of the block that needs to be checked for the "can be broken by liquids" property.
      * @return <b>true</b> if the block given by the name will break if water or lava flows to it or <b>false</b> if the block will hold back water or lava.
-     * @see {@link #canBeBrokenByLiquids(int) canBeBrokenByLiquids(int)} and {@link #canBeBrokenByLiquids(Block) canBeBrokenByLiquids(Block)} */
+     * @see {@link #canBeBrokenByLiquids(int) canBeBrokenByLiquids(int)} and {@link #canBeBrokenByLiquids(Block) canBeBrokenByLiquids(Block)}
+     */
     public static Boolean canBeBrokenByLiquids(String item_name) {
         return canBeBrokenByLiquids(getItemIdAndData(item_name, false)[0]);
     }
 
-    /** This method will tell whether or not a certain block can be locked (meaning that it's either a container--a block that contain other items, e.g. a chest--or a switch--a
+    /**
+     * This method will tell whether or not a certain block can be locked (meaning that it's either a container--a block that contain other items, e.g. a chest--or a switch--a
      * block that can be pressed or toggled on and off, e.g. a button--or a portal block--a block that can be opened and closed, e.g. a door).
-     * 
-     * @param block
-     *            is the block that needs to be checked for the "lockable" property.
-     * @param has_inventory
-     *            indicates whether the method should return <b>true</b> only <b>1)</b> if the block is a container (indicated by a <b>true</b> value), <b>2)</b> if the block
-     *            is not a container (indicated by a <b>false</b> value), or <b>3)</b> if the block is any kind of lockable block (indicated by a <b>null</b> value).
+     *
+     * @param block         is the block that needs to be checked for the "lockable" property.
+     * @param has_inventory indicates whether the method should return <b>true</b> only <b>1)</b> if the block is a container (indicated by a <b>true</b> value), <b>2)</b> if the block
+     *                      is not a container (indicated by a <b>false</b> value), or <b>3)</b> if the block is any kind of lockable block (indicated by a <b>null</b> value).
      * @return <b>true</b> if the block can be locked and it does or does not have an inventory in the way indicated by <b> <tt>has_inventory</tt></b> or <b>false</b> if the
-     *         block cannot be locked or does or does not have an inventory opposite the requirement indicated by <tt><b>has_inventory</tt> </b>.
-     * @see {@link #isLockable(int, Boolean) isLockable(int, Boolean)} and {@link #isLockable(String, Boolean) isLockable(String, Boolean)} */
+     * block cannot be locked or does or does not have an inventory opposite the requirement indicated by <tt><b>has_inventory</tt> </b>.
+     * @see {@link #isLockable(int, Boolean) isLockable(int, Boolean)} and {@link #isLockable(String, Boolean) isLockable(String, Boolean)}
+     */
     public static Boolean isLockable(Block block) {
         return isLockable(block.getTypeId());
     }
 
-    /** This method will tell whether or not a certain block can be locked (meaning that it's either a container--a block that contain other items, e.g. a chest--or a switch--a
+    /**
+     * This method will tell whether or not a certain block can be locked (meaning that it's either a container--a block that contain other items, e.g. a chest--or a switch--a
      * block that can be pressed or toggled on and off, e.g. a button--or a portal block--a block that can be opened and closed, e.g. a door).
-     * 
-     * @param block_name
-     *            is the name of the type of block that needs to be checked for the "lockable" property.
-     * @param has_inventory
-     *            indicates whether the method should return <b>true</b> only <b>1)</b> if the block is a container (indicated by a <b>true</b> value), <b>2)</b> if the block
-     *            is not a container (indicated by a <b>false</b> value), or <b>3)</b> if the block is any kind of lockable block (indicated by a <b>null</b> value).
+     *
+     * @param block_name    is the name of the type of block that needs to be checked for the "lockable" property.
+     * @param has_inventory indicates whether the method should return <b>true</b> only <b>1)</b> if the block is a container (indicated by a <b>true</b> value), <b>2)</b> if the block
+     *                      is not a container (indicated by a <b>false</b> value), or <b>3)</b> if the block is any kind of lockable block (indicated by a <b>null</b> value).
      * @return <b>true</b> if the block can be locked and it does or does not have an inventory in the way indicated by <b> <tt>has_inventory</tt></b>, <b>false</b> if the
-     *         block cannot be locked or does or does not have an inventory opposite the requirement indicated by <tt><b>has_inventory</tt> </b>, and <b>null</b> if the I.D.
-     *         given does not apply to a block at all.
-     * @see {@link #isLockable(int, Boolean) isLockable(int, Boolean)} and {@link #isLockable(Block, Boolean) isLockable(Block, Boolean)} */
+     * block cannot be locked or does or does not have an inventory opposite the requirement indicated by <tt><b>has_inventory</tt> </b>, and <b>null</b> if the I.D.
+     * given does not apply to a block at all.
+     * @see {@link #isLockable(int, Boolean) isLockable(int, Boolean)} and {@link #isLockable(Block, Boolean) isLockable(Block, Boolean)}
+     */
     public static Boolean isLockable(String block_name) {
         Integer[] id_and_data = getItemIdAndData(block_name, false);
         if (id_and_data == null)
